@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <div class="test-text">no-name-Fistapp</div>
+    <div class="test-text">no-name-secondcommit</div>
   </div>
 </template>
 <script>
