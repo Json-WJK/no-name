@@ -1,6 +1,6 @@
 <template>
   <div class="test">
-    <div class="test-text">no-name</div>
+    <div class="test-text">no-name-Fistapp</div>
   </div>
 </template>
 <script>
