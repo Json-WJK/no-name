@@ -4,7 +4,7 @@
       <div class="LoginOrRegister-mask-window">
         <div class="window-title">
           <span class="window-title-at">{{LoginOrRegister? '登录': '注册'}}</span>
-          <span class="window-title-shut">x</span>
+          <span class="window-title-shut" @click="shut">x</span>
         </div>
         <div class="window-form">
           <input type="text" class="account" placeholder="请输入手机号" v-model="account" />
@@ -46,16 +46,16 @@ export default {
       // 验证
       if (!isPoneAvailable(this.account)) {
         this.$notify({
-          title: '错误',
-          message: '请输入正确的手机号',
-          type: 'warning'
+          title: "错误",
+          message: "请输入正确的手机号",
+          type: "warning"
         });
         return false;
       } else if (this.password.length < 6 && !this.LoginOrRegister) {
         this.$notify({
-          title: '错误',
-          message: '密码设置不能少于6位',
-          type: 'warning'
+          title: "错误",
+          message: "密码设置不能少于6位",
+          type: "warning"
         });
         return false;
       }
@@ -65,6 +65,10 @@ export default {
     },
     register() {
       // 注册
+    },
+    shut() {
+      // 关闭窗口
+      this.$emit("EmitLoginOrRegister");
     }
   }
 };
