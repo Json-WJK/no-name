@@ -1,14 +1,14 @@
 <template>
   <div class="home">
-    <test></test>
+    <LoginOrRegister></LoginOrRegister>
   </div>
 </template>
 
 <script>
-import test from '@/components/test'
+import LoginOrRegister from '@/components/LoginOrRegister'
 export default {
   components: {
-    test
+    LoginOrRegister
   }
 };
 </script>

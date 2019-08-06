@@ -11,6 +11,7 @@ input{
 }
 button {
     outline: none;
+    border: none;
 }
 ul,ol{
     list-style: none;
@@ -22,4 +23,9 @@ img{
 a{
     text-decoration: none;
     color: black;
+}
+
+/* 为元素增加鼠标悬停小手效果 */
+.cursor-pointer {
+    cursor:pointer
 }
