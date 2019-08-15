@@ -1,12 +1,22 @@
 <template>
   <div class="LoginOrRegister">
     <div class="LoginOrRegister-mask">
-      <div class="LoginOrRegister-mask-window">
+      <div
+        class="LoginOrRegister-mask-window"
+        :style="{maxHeight: LoginOrRegister? '280px': '330px'}"
+      >
         <div class="window-title">
           <span class="window-title-at">{{LoginOrRegister? '登录': '注册'}}</span>
           <span class="window-title-shut" @click="shut">x</span>
         </div>
         <div class="window-form">
+          <input
+            v-if="!LoginOrRegister"
+            type="text"
+            class="account"
+            placeholder="请输入昵称"
+            v-model="name"
+          />
           <input type="text" class="account" placeholder="请输入手机号" v-model="account" />
           <input
             type="password"
@@ -29,10 +39,12 @@
 </template>
 <script>
 import { isPoneAvailable } from "@/utils";
+import { register, login } from "@/api/api";
 export default {
   data() {
     return {
       LoginOrRegister: 1, // 当前为 登录或注册  1:登录 0:注册
+      name: "", // 昵称
       account: "", // 账号
       password: "" // 密码
     };
@@ -40,37 +52,81 @@ export default {
   methods: {
     LoginOrRegisterF() {
       if (!this.verify()) return;
+      console.log(this.LoginOrRegisterF);
       this.LoginOrRegister ? this.login() : this.register();
     },
     verify() {
       // 验证
-      if (!isPoneAvailable(this.account)) {
-        this.$notify({
-          title: "错误",
+      if (!this.LoginOrRegister && !this.name) {
+        this.$message({
+          message: "请输入正确的昵称",
+          type: "warning"
+        });
+        return false;
+      } else if (!isPoneAvailable(this.account)) {
+        this.$message({
           message: "请输入正确的手机号",
           type: "warning"
         });
         return false;
       } else if (this.password.length < 6 && !this.LoginOrRegister) {
-        this.$notify({
-          title: "错误",
+        this.$message({
           message: "密码设置不能少于6位",
           type: "warning"
         });
         return false;
       }
+      return true;
     },
     login() {
       // 登录
+      let data = {
+        phone: this.account,
+        upwd: this.password
+      };
+      login(data).then(res => {
+        if (res.ok) {
+          this.$message({
+            message: res.msg,
+            type: "success"
+          });
+          console.log(res.data.items[0]);
+        } else {
+          this.$message({
+            message: res.msg,
+            type: "warning"
+          });
+        }
+      });
     },
     register() {
+      console.log("注册");
       // 注册
+      let data = {
+        uname: this.name,
+        phone: this.account,
+        upwd: this.password
+      };
+      register(data).then(res => {
+        if (res.ok) {
+          this.$message({
+            message: "恭喜你，注册成功!",
+            type: "success"
+          });
+        } else {
+          this.$message({
+            message: res.msg,
+            type: "warning"
+          });
+        }
+      });
     },
     shut() {
       // 关闭窗口
       this.$emit("EmitLoginOrRegister");
     }
-  }
+  },
+  mounted() {}
 };
 </script>
 <style lang="scss" scoped>
@@ -87,7 +143,7 @@ export default {
       width: 100%;
       height: 100%;
       max-width: 320px;
-      max-height: 300px;
+      max-height: 280px;
       background: #fff;
       position: fixed;
       top: 0;
