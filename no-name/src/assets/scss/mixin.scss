@@ -1,3 +1,6 @@
+// 全局主题色
+$subjectColor: #02b2b5;
+
 // 背景图片地址和大小
 @mixin back($url, $size: 100% 100%) {
 	background-image: url($url);

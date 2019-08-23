@@ -130,6 +130,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "@/assets/scss/mixin.scss";
 .LoginOrRegister {
   &-mask {
     position: fixed;
@@ -185,7 +186,7 @@ export default {
           height: 40px;
           font-size: 14px;
           color: #fff;
-          background: #007fff;
+          background: $subjectColor;
           margin-top: 10px;
         }
       }
@@ -198,7 +199,7 @@ export default {
           color: #aaa;
         }
         &-switchover {
-          color: #007fff;
+          color: $subjectColor;
         }
       }
     }
