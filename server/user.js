@@ -5,7 +5,7 @@ const pool = require('../pool.js');
 var router = express.Router();
 
 //用户注册
-router.post('/register', function (req, res) {
+router.post('/register', async (req, res) => {
 	res.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
 	var obj = req.body;
 	var $uname = obj.uname;
@@ -33,7 +33,7 @@ router.post('/register', function (req, res) {
 		return;
 	}
 	var sql = 'select * from user_info where uname=?'
-	pool.query(sql, [$uname], function (err, result) {
+	pool.query(sql, [$uname], (err, result) => {
 		console.log('查询结果', result)
 		if (err) throw err;
 		if (result.length > 0) {
@@ -42,11 +42,11 @@ router.post('/register', function (req, res) {
 				msg: "该昵称已被注册哦！"
 			}))
 			res.end();
+			return
 		}
-	});
-	sql = 'INSERT INTO user_info (uname,phone,upwd) VALUES(?,?,?)';
-	setTimeout(function() {
-		pool.query(sql, [$uname, $phone, $upwd], function (err, result) {
+		sql = 'INSERT INTO user_info (uname,phone,upwd) VALUES(?,?,?)';
+		pool.query(sql, [$uname, $phone, $upwd], (err, result) => {
+			console.log('是否走到这里', err)
 			if (err) throw err;
 			if (result.affectedRows > 0) {
 				res.write(JSON.stringify({
@@ -59,9 +59,11 @@ router.post('/register', function (req, res) {
 					msg: "注册失败！"
 				}))
 			};
+			console.log('完成注册')
 			res.end();
 		});
-	}, 0);
+	});
+
 });
 
 //用户登录

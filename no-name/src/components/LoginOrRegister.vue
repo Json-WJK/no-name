@@ -3,7 +3,7 @@
     <div class="LoginOrRegister-mask">
       <div
         class="LoginOrRegister-mask-window"
-        :style="{maxHeight: LoginOrRegister? '280px': '330px'}"
+        :style="{maxHeight: LoginOrRegister? '2.80rem': '3.30rem'}"
       >
         <div class="window-title">
           <span class="window-title-at">{{LoginOrRegister? '登录': '注册'}}</span>
@@ -132,6 +132,7 @@ export default {
 <style lang="scss" scoped>
 @import "@/assets/scss/mixin.scss";
 .LoginOrRegister {
+  font-size: 0.14rem;
   &-mask {
     position: fixed;
     top: 0;
@@ -143,8 +144,8 @@ export default {
     &-window {
       width: 100%;
       height: 100%;
-      max-width: 320px;
-      max-height: 280px;
+      max-width: 3.2rem;
+      max-height: 2.8rem;
       background: #fff;
       position: fixed;
       top: 0;
@@ -153,48 +154,51 @@ export default {
       bottom: 0;
       margin: auto;
       box-sizing: border-box;
-      padding: 24px;
+      padding: 0.24rem;
       .window-title {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 23px;
-        margin-bottom: 24px;
+        height: 0.23rem;
+        margin-bottom: 0.24rem;
         &-at {
           font-weight: bold;
           color: #000;
-          font-size: 18px;
+          font-size: 0.18rem;
         }
         &-shut {
           color: #aaa;
+          font-size: 0.17rem;
         }
       }
       .window-form {
         width: 100%;
         input {
           width: 100%;
-          height: 40px;
-          border: 1px solid #e9e9e9;
-          border-radius: 2px;
+          height: 0.4rem;
+          border: 0.01rem solid #e9e9e9;
+          border-radius: 0.02rem;
           box-sizing: border-box;
-          padding: 10px;
-          margin-bottom: 10px;
+          padding: 0.1rem;
+          margin-bottom: 0.1rem;
+          display: block;
         }
         button {
           width: 100%;
-          height: 40px;
-          font-size: 14px;
+          height: 0.4rem;
+          font-size: 0.14rem;
           color: #fff;
           background: $subjectColor;
-          margin-top: 10px;
+          margin-top: 0.1rem;
+          display: block;
         }
       }
       .window-ify {
-        height: 18px;
+        height: 0.18rem;
         width: 100%;
-        font-size: 13px;
-        margin-top: 10px;
+        font-size: 0.13rem;
+        margin-top: 0.1rem;
         &-at {
           color: #aaa;
         }
