@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <LoginOrRegister></LoginOrRegister>
+    <!-- <LoginOrRegister></LoginOrRegister> -->
+
   </div>
 </template>
 
@@ -9,7 +10,10 @@ import LoginOrRegister from '@/components/LoginOrRegister'
 export default {
   components: {
     LoginOrRegister
-  }
+  },
+  mounted() {
+    this.$toast.succeed('提示')
+  },
 };
 </script>
 <style lang="scss" scoped>
