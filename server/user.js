@@ -5,7 +5,7 @@ const pool = require('../pool.js');
 var router = express.Router();
 
 //用户注册
-router.post('/register', async (req, res) => {
+router.post('/register', (req, res) => {
 	res.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
 	var obj = req.body;
 	var $uname = obj.uname;
@@ -67,14 +67,14 @@ router.post('/register', async (req, res) => {
 });
 
 //用户登录
-router.post('/login', function (req, res) {
+router.post('/login', (req, res) => {
 	res.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
 	var phone = req.body.phone;
 	var upwd = req.body.upwd;
 	pool.query(
 		"select * from user_info where phone=? and upwd=?",
 		[phone, upwd],
-		function (err, result) {
+		(err, result)=> {
 			if (err) console.log(err);
 			if (result.length > 0) {
 				var user = result[0]
