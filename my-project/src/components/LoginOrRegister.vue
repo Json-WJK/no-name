@@ -3,7 +3,7 @@
     <div class="LoginOrRegister-mask">
       <div
         class="LoginOrRegister-mask-window"
-        :style="{maxHeight: LoginOrRegister? 140 * 2 + 'px': 165 * 2 + 'px'}"
+        :style="{maxHeight: LoginOrRegister? '5.6rem': '6.6rem'}"
       >
         <div class="window-title">
           <span class="window-title-at">{{LoginOrRegister? '登录': '注册'}}</span>

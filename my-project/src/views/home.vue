@@ -190,7 +190,7 @@ export default {
           color: $titleColor;
           font-weight: 800;
           margin-bottom: 5px;
-          font-size: 26px;
+          font-size: 30px;
           display: -webkit-box;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -201,7 +201,7 @@ export default {
         }
         &-content {
           color: $contentColor;
-          font-size: 12px;
+          font-size: 20px;
           display: -webkit-box;
           overflow: hidden;
           text-overflow: ellipsis;
