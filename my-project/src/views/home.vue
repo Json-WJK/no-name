@@ -1,8 +1,10 @@
 <template>
   <div class="home">
-    <LoginOrRegister v-if="LoginOrRegister" @shut="LoginOrRegisterF"></LoginOrRegister>
     <div class="home-seek">
-      <div class="home-seek-input">搜索感兴趣的内容</div>
+      <div class="home-seek-input">
+        <i class="iconfont">&#xe614;</i>
+        <span>搜索感兴趣的内容</span>
+      </div>
     </div>
     <div class="home-title">
       <div class="home-title-scroll">
@@ -15,7 +17,20 @@
       </div>
     </div>
     <div class="home-content">
-      <div v-for="(item,index) in contents[titleIndex]" :key="index" @click="LoginOrRegisterF" class="home-content-every">
+      <div
+        v-for="(item,index) in contents[titleIndex]"
+        :key="index"
+        @click="LoginOrRegisterF"
+        class="home-content-every"
+      >
+        <!-- 用户头像、昵称、文章分类等 -->
+        <div class="home-content-every-user">
+          <span class="home-content-every-user-info">
+            <img :src="item.avatar" class="home-content-every-user-info-avatar" alt />
+            <span class="home-content-every-user-info-nickname">{{ item.nickname }}</span>
+          </span>
+        </div>
+        <!-- 中间标题、内容、封面图 -->
         <div class="home-content-every-box">
           <div v-if="!item.coverImg" class="home-content-every-article">
             <div class="home-content-every-article-title">{{ item.title }}</div>
@@ -30,17 +45,36 @@
           </div>
           <img v-if="item.coverImg" :src="item.coverImg" alt />
         </div>
+        <!-- 点赞与评论数 -->
+        <div class="home-content-every-additional">
+          <span class="home-content-every-additional-at">
+            <span>
+              <i class="iconfont">&#xe600;</i>
+            </span>
+            <span>7</span>
+          </span>
+          <span class="home-content-every-additional-at">
+            <span>
+              <i class="iconfont">&#xe619;</i>
+            </span>
+            <span>4</span>
+          </span>
+        </div>
       </div>
     </div>
+    <LoginOrRegister v-if="LoginOrRegister" @shut="LoginOrRegisterF"></LoginOrRegister>
+    <tabbar></tabbar>
   </div>
 </template>
 
 <script>
 import LoginOrRegister from "@/components/LoginOrRegister";
+import tabbar from "@/components/tabbar";
 import { Toast } from "mand-mobile";
 export default {
   components: {
-    LoginOrRegister
+    LoginOrRegister,
+    tabbar
   },
   data() {
     return {
@@ -50,12 +84,18 @@ export default {
       contents: [
         [
           {
+            avatar:
+              "http://www.xiaoniren.cn/upload/attachment/7/3719/201908/15670077457071.jpg",
+            nickname: "Mr.Wang",
             title: "DOM属性总结",
             content:
               "跟PC开发不同，移动端的UI应该具备友好的移动端交互，例如上拉下拉、手指滑屏、按下滑动等等。我们在这些方面做了充分的考虑，每个组件都是针对移动端精心打造，追求原生级别的操作体验。",
             coverImg: ""
           },
           {
+            avatar:
+              "http://www.xiaoniren.cn/upload/attachment/7/3719/201908/15670077457071.jpg",
+            nickname: "Mr.Wang",
             title: "DOM属性总结",
             content:
               "跟PC开发不同，移动端的UI应该具备友好的移动端交互，例如上拉下拉、手指滑屏、按下滑动等等。我们在这些方面做了充分的考虑，每个组件都是针对移动端精心打造，追求原生级别的操作体验。",
@@ -63,12 +103,18 @@ export default {
               "https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=489343535,3713603063&fm=58"
           },
           {
+            avatar:
+              "http://www.xiaoniren.cn/upload/attachment/7/3719/201908/15670077457071.jpg",
+            nickname: "Mr.Wang",
             title: "DOM属性总结",
             content:
               "跟PC开发不同，移动端的UI应该具备友好的移动端交互，例如上拉下拉、手指滑屏、按下滑动等等。我们在这些方面做了充分的考虑，每个组件都是针对移动端精心打造，追求原生级别的操作体验。",
             coverImg: ""
           },
           {
+            avatar:
+              "http://www.xiaoniren.cn/upload/attachment/7/3719/201908/15670077457071.jpg",
+            nickname: "Mr.Wang",
             title: "DOM属性总结",
             content:
               "跟PC开发不同，移动端的UI应该具备友好的移动端交互，例如上拉下拉、手指滑屏、按下滑动等等。我们在这些方面做了充分的考虑，每个组件都是针对移动端精心打造，追求原生级别的操作体验。",
@@ -76,12 +122,18 @@ export default {
               "https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=489343535,3713603063&fm=58"
           },
           {
+            avatar:
+              "http://www.xiaoniren.cn/upload/attachment/7/3719/201908/15670077457071.jpg",
+            nickname: "Mr.Wang",
             title: "DOM属性总结",
             content:
               "跟PC开发不同，移动端的UI应该具备友好的移动端交互，例如上拉下拉、手指滑屏、按下滑动等等。我们在这些方面做了充分的考虑，每个组件都是针对移动端精心打造，追求原生级别的操作体验。",
             coverImg: ""
           },
           {
+            avatar:
+              "http://www.xiaoniren.cn/upload/attachment/7/3719/201908/15670077457071.jpg",
+            nickname: "Mr.Wang",
             title: "DOM属性总结",
             content:
               "跟PC开发不同，移动端的UI应该具备友好的移动端交互，例如上拉下拉、手指滑屏、按下滑动等等。我们在这些方面做了充分的考虑，每个组件都是针对移动端精心打造，追求原生级别的操作体验。",
@@ -89,6 +141,9 @@ export default {
               "https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=489343535,3713603063&fm=58"
           },
           {
+            avatar:
+              "http://www.xiaoniren.cn/upload/attachment/7/3719/201908/15670077457071.jpg",
+            nickname: "Mr.Wang",
             title: "DOM属性总结",
             content:
               "跟PC开发不同，移动端的UI应该具备友好的移动端交互，例如上拉下拉、手指滑屏、按下滑动等等。我们在这些方面做了充分的考虑，每个组件都是针对移动端精心打造，追求原生级别的操作体验。",
@@ -96,12 +151,18 @@ export default {
               "https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=489343535,3713603063&fm=58"
           },
           {
+            avatar:
+              "http://www.xiaoniren.cn/upload/attachment/7/3719/201908/15670077457071.jpg",
+            nickname: "Mr.Wang",
             title: "DOM属性总结",
             content:
               "跟PC开发不同，移动端的UI应该具备友好的移动端交互，例如上拉下拉、手指滑屏、按下滑动等等。我们在这些方面做了充分的考虑，每个组件都是针对移动端精心打造，追求原生级别的操作体验。",
             coverImg: ""
           },
           {
+            avatar:
+              "http://www.xiaoniren.cn/upload/attachment/7/3719/201908/15670077457071.jpg",
+            nickname: "Mr.Wang",
             title: "DOM属性总结",
             content:
               "跟PC开发不同，移动端的UI应该具备友好的移动端交互，例如上拉下拉、手指滑屏、按下滑动等等。我们在这些方面做了充分的考虑，每个组件都是针对移动端精心打造，追求原生级别的操作体验。",
@@ -115,7 +176,7 @@ export default {
   mounted() {},
   methods: {
     LoginOrRegisterF() {
-      this.LoginOrRegister = !this.LoginOrRegister
+      this.LoginOrRegister = !this.LoginOrRegister;
     },
     ifyTitle(index) {
       // 标题切换
@@ -128,7 +189,9 @@ export default {
 .home {
   @import "@/assets/scss/mixin.scss";
   text-align: left;
+  box-sizing: border-box;
   padding-top: 150px;
+  padding-bottom: 96px;
   &-seek {
     position: fixed;
     top: 0;
@@ -177,6 +240,23 @@ export default {
       background: #fff;
       box-sizing: border-box;
       padding: 20px 0;
+      &-user {
+        width: 95%;
+        display: flex;
+        margin: 0 auto 10px;
+        &-info {
+          height: 45px;
+          line-height: 45px;
+          &-avatar {
+            width: 45px !important;
+            height: 45px !important;
+          }
+          &-nickname {
+            color: $contentColor;
+            font-weight: 400;
+          }
+        }
+      }
       &-box {
         width: 95%;
         display: flex;
@@ -217,6 +297,15 @@ export default {
       img {
         width: 150px;
         height: 150px;
+      }
+      &-additional {
+        width: 95%;
+        display: flex;
+        margin: 10px auto 0;
+        color: $auxiliaryColor;
+        &-at {
+          margin-right: 30px;
+        }
       }
     }
   }

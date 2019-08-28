@@ -1,5 +1,21 @@
 /* 样式初始化 */
 @charset "utf-8";
+@font-face {
+    font-family: 'iconfont';  /* project id 1367945 */
+    src: url('//at.alicdn.com/t/font_1367945_i7xsia5xhw.eot');
+    src: url('//at.alicdn.com/t/font_1367945_i7xsia5xhw.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_1367945_i7xsia5xhw.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1367945_i7xsia5xhw.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1367945_i7xsia5xhw.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1367945_i7xsia5xhw.svg#iconfont') format('svg');
+}
+.iconfont{
+    font-family:"iconfont" !important;
+    font-size:32px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
 body,ul,ol,dd,p,h1,h2,h3,h4,h5,h6,input,textarea,select{
     margin: 0;
     padding: 0;
