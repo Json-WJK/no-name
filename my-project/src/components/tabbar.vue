@@ -14,7 +14,7 @@ export default {
     return {
       list: [
         { router: "/home", text: "首页", icon: "&#xe642;" },
-        { router: "/center", text: "我的", icon: "&#xe601;" }
+        { router: "/member", text: "我的", icon: "&#xe601;" }
       ],
       select: 0
     };

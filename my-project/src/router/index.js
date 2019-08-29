@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/home'
-import Center from '@/views/center'
+import Member from '@/views/member'
 Vue.use(Router)
 
 export default new Router({
@@ -19,9 +19,9 @@ export default new Router({
     },
     // 个人中心
     {
-      path: '/center',
-      name: 'Center',
-      component: Center
+      path: '/member',
+      name: 'Member',
+      component: Member
     }
   ]
 })
