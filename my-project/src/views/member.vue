@@ -5,22 +5,25 @@
     <div class="impression"></div>
     <div class="user-info">
       <div class="avatar">
-        <img
-          class="photo"
-          src="http://www.xiaoniren.cn/upload/attachment/7/3719/201908/15670077457071.jpg"
-          alt
-        />
-        <div class="signIn">
+        <div v-if="loginInfo">
+          <img v-if="loginInfo.avatar" :src="loginInfo.avatar" alt="">
+          <i v-else class="iconfont photo" @click="LoginOrRegisterF">&#xe748;</i>
+        </div>
+        <div v-else>
+          <i class="iconfont photo" @click="LoginOrRegisterF">&#xe748;</i>
+          <span class="LoginOrRegister" @click="LoginOrRegisterF">登录/注册</span>
+        </div>
+        <div v-if="loginInfo" class="signIn">
           <span>
             <i class="iconfont">&#xe658;</i>
           </span>
           <span>签到</span>
         </div>
       </div>
-      <div class="nameAndSignature">
+      <div class="nameAndSignature" v-if="loginInfo">
         <div>
-          <div class="name">地铁站的风</div>
-          <div class="signature">这个人很酷，但他从来不说</div>
+          <div class="name">{{ loginInfo.uname }}</div>
+          <div class="signature">{{ loginInfo.signature || '这个人很酷，但他从来不说'}}</div>
         </div>
         <div>
           <span>
@@ -29,21 +32,34 @@
         </div>
       </div>
     </div>
+    <submitBox></submitBox>
+    <LoginOrRegister v-show="LoginOrRegister" @shut="LoginOrRegisterF"></LoginOrRegister>
   </div>
 </template>
 <script>
 import LoginOrRegister from "@/components/LoginOrRegister";
 import tabbar from "@/components/tabbar";
+import submitBox from '@/components/submitBox'
 import { Toast } from "mand-mobile";
 export default {
   components: {
     LoginOrRegister,
-    tabbar
+    tabbar,
+    submitBox
   },
   data() {
     return {
+      loginInfo: null, // 用户信息
       LoginOrRegister: false
     };
+  },
+  mounted() {
+    this.loginInfo = localStorage.getItem('loginInfo') && JSON.parse(localStorage.getItem('loginInfo'))
+  },
+  methods: {
+    LoginOrRegisterF() {
+      this.LoginOrRegister = !this.LoginOrRegister
+    }
   }
 };
 </script>
@@ -51,7 +67,6 @@ export default {
 @import "@/assets/scss/mixin.scss";
 .member {
   text-align: left;
-  height: 2000px;
   .impression {
     position: absolute;
     top: 0;
@@ -66,6 +81,7 @@ export default {
       width: 95%;
       margin: 0 auto;
       margin-top: 150px;
+      height: 130px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -73,9 +89,19 @@ export default {
         display: inline-block;
         width: 130px;
         height: 130px;
+        font-size: 128px;
         box-sizing: border-box;
         border: 1px solid #fff;
         border-radius: 50%;
+        margin-left: 20px;
+        vertical-align: middle;
+      }
+      .LoginOrRegister {
+        height: 100%;
+        line-height: 130px;
+        font-size: 30px;
+        color: $titleColor;
+        font-weight: 400;
         margin-left: 20px;
       }
       .signIn {
@@ -110,14 +136,14 @@ export default {
       span {
         display: inline-block;
         background: $subjectColor;
-        box-shadow:$subjectColor 0px 0px 5px;
+        box-shadow: $subjectColor 0px 0px 5px;
         width: 50px;
         height: 50px;
         line-height: 50px;
         text-align: center;
         border-radius: 50%;
         .compile {
-          color: #fff;;
+          color: #fff;
         }
       }
     }

@@ -20,7 +20,6 @@
       <div
         v-for="(item,index) in contents[titleIndex]"
         :key="index"
-        @click="LoginOrRegisterF"
         class="home-content-every"
       >
         <!-- 用户头像、昵称、文章分类等 -->
@@ -62,23 +61,19 @@
         </div>
       </div>
     </div>
-    <LoginOrRegister v-if="LoginOrRegister" @shut="LoginOrRegisterF"></LoginOrRegister>
     <tabbar></tabbar>
   </div>
 </template>
 
 <script>
-import LoginOrRegister from "@/components/LoginOrRegister";
 import tabbar from "@/components/tabbar";
 import { Toast } from "mand-mobile";
 export default {
   components: {
-    LoginOrRegister,
     tabbar
   },
   data() {
     return {
-      LoginOrRegister: false,
       titleItems: ["推荐", "关注"],
       titleIndex: 0, //当前选中标题下标
       contents: [
@@ -175,9 +170,6 @@ export default {
   },
   mounted() {},
   methods: {
-    LoginOrRegisterF() {
-      this.LoginOrRegister = !this.LoginOrRegister;
-    },
     ifyTitle(index) {
       // 标题切换
       this.titleIndex = index;

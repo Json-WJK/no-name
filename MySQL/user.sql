@@ -8,6 +8,7 @@ CREATE TABLE user_info(
 	uid INT PRIMARY KEY AUTO_INCREMENT,
 	uname VARCHAR(32),#账号
 	phone VARCHAR(32),#手机
-	upwd VARCHAR(32)
+	upwd VARCHAR(32),#密码
+	signature VARCHAR(32)#签名
 );
-INSERT INTO zhw_user VALUES(1,"920819994","18696052995",'123456');
+INSERT INTO user_info VALUES(1,"920819994","18696052995",'123456','地铁站的风');

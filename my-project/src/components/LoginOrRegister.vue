@@ -80,6 +80,8 @@ export default {
         if (res.ok) {
           Toast.succeed(res.msg);
           this.shut()
+          localStorage.setItem('loginInfo', JSON.stringify(res.data.items[0]))
+          this.$store.commit('setAPPRefresh', true)
           console.log(res.data.items[0]);
         } else {
           Toast.failed(res.msg);
@@ -109,8 +111,7 @@ export default {
       // 关闭窗口
       this.$emit("shut");
     }
-  },
-  mounted() {}
+  }
 };
 </script>
 <style lang="scss" scoped>
