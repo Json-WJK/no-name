@@ -2,13 +2,13 @@
   <div class="submitBox">
     <div class="submitBox-mask">
       <div class="submitBox-mask-box">
-        <div class="title">title</div>
+        <div class="title">{{ title }}</div>
         <div class="input">
-          <input type="text" />
+          <input type="text" :maxlength="maxLength"/>
         </div>
         <div class="cancel-or-affirm">
-          <span>{{ cancel }}</span>
-          <span>{{ affirm }}</span>
+          <span @click="cancelF">{{ cancel }}</span>
+          <span @click="affirmF">{{ affirm }}</span>
         </div>
       </div>
     </div>
@@ -28,11 +28,24 @@ export default {
     affirm: {
       type: String,
       default: "确定"
+    },
+    maxLength: {
+      type: String || Number,
+      default: 30
     }
-  }
+  },
+  methods: {
+    cancelF() { // 取消
+
+    },
+    affirmF() { // 确定
+
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>
+@import "@/assets/scss/mixin.scss";
 .submitBox {
   &-mask {
     position: fixed;
@@ -49,13 +62,36 @@ export default {
       right: 0;
       bottom: 0;
       margin: auto;
+      box-sizing: border-box;
+      padding: 25px;
       width: 75%;
       height: 300px;
       background: #fff;
       border-radius: 5px;
       .title {
         font-size: 30px;
-        // color: 
+        color: $titleColor;
+        font-weight: 600;
+      }
+      .input {
+        margin-top: 30px;
+        height: 60px;
+        border-bottom: 4px $subjectColor solid;
+        input {
+          height: 100%;
+        }
+      }
+      .cancel-or-affirm {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 5px;
+        margin-top: 70px;
+        display: flex;
+        justify-content: flex-end;
+        color: $subjectColor;
+        span {
+          margin-left: 50px;
+        }
       }
     }
   }
