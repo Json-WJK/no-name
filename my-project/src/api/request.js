@@ -4,8 +4,8 @@ import qs from 'qs'
 import { HTTP } from '@/store'
 
 const service = axios.create({
-  baseURL: HTTP,
-  timeout: 5000
+  baseURL: HTTP, // 请求默认域名
+  timeout: 10000
 })
 service.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // 添加请求拦截器

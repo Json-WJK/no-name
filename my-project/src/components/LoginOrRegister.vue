@@ -30,7 +30,7 @@
           <span class="window-ify-at">{{LoginOrRegister? '没有账号？': ''}}</span>
           <span
             class="window-ify-switchover cursor-pointer"
-            @click="LoginOrRegister = !LoginOrRegister;account = '';password = '';"
+            @click="switchover()"
           >{{LoginOrRegister? '注册': '已有账号登录'}}</span>
         </div>
       </div>
@@ -52,22 +52,31 @@ export default {
   },
   methods: {
     LoginOrRegisterF() {
+      // 登录或注册
       if (!this.verify()) return;
       console.log(this.LoginOrRegisterF);
       this.LoginOrRegister ? this.login() : this.register();
     },
     verify() {
       // 验证
+      console.log(
+        this.LoginOrRegister,
+        this.name,
+        this.accoount,
+        this.password
+      );
+      // return false;
       if (!this.LoginOrRegister && !this.name) {
         Toast.failed("请输入正确的昵称");
         return false;
       } else if (!isPoneAvailable(this.account)) {
         Toast.failed("请输入正确的手机号");
         return false;
-      } else if (this.password.length < 6 && !this.LoginOrRegister) {
+      } else if (this.password.length < 6) {
         Toast.failed("密码设置不能少于6位");
         return false;
       }
+      // return false
       return true;
     },
     login() {
@@ -79,9 +88,9 @@ export default {
       login(data).then(res => {
         if (res.ok) {
           Toast.succeed(res.msg);
-          this.shut()
-          localStorage.setItem('loginInfo', JSON.stringify(res.data.items[0]))
-          this.$store.commit('setAPPRefresh', true)
+          this.shut();
+          localStorage.setItem("loginInfo", JSON.stringify(res.data.items[0]));
+          this.$store.commit("setAPPRefresh", true);
           console.log(res.data.items[0]);
         } else {
           Toast.failed(res.msg);
@@ -100,12 +109,19 @@ export default {
         if (res.ok) {
           Toast.succeed("恭喜你，注册成功!");
           this.LoginOrRegister = !this.LoginOrRegister;
-          this.account = '';
-          this.password = '';
+          this.account = "";
+          this.password = "";
         } else {
           Toast.failed(res.msg);
         }
       });
+    },
+    switchover() {
+      // 切换登录与注册
+      this.LoginOrRegister = !this.LoginOrRegister;
+      this.account = "";
+      this.password = "";
+      this.name = "";
     },
     shut() {
       // 关闭窗口

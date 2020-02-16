@@ -1,17 +1,17 @@
 <template>
   <div class="member">
-    <LoginOrRegister v-if="LoginOrRegister"></LoginOrRegister>
-    <tabbar></tabbar>
+    <!-- 顶部倾斜装饰 -->
     <div class="impression"></div>
     <div class="user-info">
+      <!-- 用户头像 登录注册 签到 -->
       <div class="avatar">
-        <div v-if="loginInfo">
-          <img v-if="loginInfo.avatar" :src="loginInfo.avatar" alt="">
-          <i v-else class="iconfont photo" @click="LoginOrRegisterF">&#xe748;</i>
+        <div v-if="loginInfo" @click="LoginF">
+          <img v-if="loginInfo.avatar" :src="loginInfo.avatar" alt />
+          <i v-else class="iconfont photo">&#xe748;</i>
         </div>
-        <div v-else>
-          <i class="iconfont photo" @click="LoginOrRegisterF">&#xe748;</i>
-          <span class="LoginOrRegister" @click="LoginOrRegisterF">登录/注册</span>
+        <div v-else @click="LoginF">
+          <i class="iconfont photo">&#xe748;</i>
+          <span class="LoginOrRegister">登录/注册</span>
         </div>
         <div v-if="loginInfo" class="signIn">
           <span>
@@ -20,26 +20,29 @@
           <span>签到</span>
         </div>
       </div>
+      <!-- 用户名称与个性签名 -->
       <div class="nameAndSignature" v-if="loginInfo">
         <div>
           <div class="name">{{ loginInfo.uname }}</div>
           <div class="signature">{{ loginInfo.signature || '这个人很酷，但他从来不说'}}</div>
         </div>
-        <div>
+        <!-- 修改签名 -->
+        <div @click="setSignature">
           <span>
             <i class="iconfont compile">&#xe63c;</i>
           </span>
         </div>
       </div>
     </div>
-    <submitBox></submitBox>
+    <submitBox @close="setSignature" v-if="submitBox"></submitBox>
     <LoginOrRegister v-show="LoginOrRegister" @shut="LoginOrRegisterF"></LoginOrRegister>
+    <tabbar></tabbar>
   </div>
 </template>
 <script>
 import LoginOrRegister from "@/components/LoginOrRegister";
 import tabbar from "@/components/tabbar";
-import submitBox from '@/components/submitBox'
+import submitBox from "@/components/submitBox";
 import { Toast } from "mand-mobile";
 export default {
   components: {
@@ -50,15 +53,28 @@ export default {
   data() {
     return {
       loginInfo: null, // 用户信息
-      LoginOrRegister: false
+      LoginOrRegister: false, // 登录隐藏弹框是否展示
+      submitBox: false // 提交表单弹框是否展示
     };
   },
   mounted() {
-    this.loginInfo = localStorage.getItem('loginInfo') && JSON.parse(localStorage.getItem('loginInfo'))
+    // 获取用户信息
+    this.loginInfo =
+      localStorage.getItem("loginInfo") &&
+      JSON.parse(localStorage.getItem("loginInfo"));
   },
   methods: {
+    setSignature() {
+      // 修改签名
+      this.submitBox = !this.submitBox
+    },
+    LoginF() {
+      // 未登录点击调出注册登录弹框
+      this.loginInfo || this.LoginOrRegister();
+    },
     LoginOrRegisterF() {
-      this.LoginOrRegister = !this.LoginOrRegister
+      // 登录注册弹框
+      this.LoginOrRegister = !this.LoginOrRegister;
     }
   }
 };

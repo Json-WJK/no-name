@@ -1,10 +1,10 @@
 <template>
-  <div class="submitBox">
+  <div class="submitBox" @click="close">
     <div class="submitBox-mask">
-      <div class="submitBox-mask-box">
+      <div class="submitBox-mask-box" @click.stop="stop">
         <div class="title">{{ title }}</div>
         <div class="input">
-          <input type="text" :maxlength="maxLength"/>
+          <input type="text" :maxlength="maxLength" :placeholder="'最多输入' + maxLength + '个字'" />
         </div>
         <div class="cancel-or-affirm">
           <span @click="cancelF">{{ cancel }}</span>
@@ -23,7 +23,7 @@ export default {
     },
     cancel: {
       type: String,
-      default: ""
+      default: "取消"
     },
     affirm: {
       type: String,
@@ -35,13 +35,24 @@ export default {
     }
   },
   methods: {
-    cancelF() { // 取消
-
+    cancelF() {
+      // 取消
+      this.close();
     },
-    affirmF() { // 确定
+    affirmF() {
+      // 确定
 
+      this.close();
+    },
+    close() {
+      // 关闭弹窗
+      this.$emit("close");
+    },
+    stop() {
+      // 阻止冒泡
+      return
     }
-  },
+  }
 };
 </script>
 <style lang="scss" scoped>

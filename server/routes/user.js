@@ -4,7 +4,7 @@ const pool = require('../pool.js');
 //创建路由器
 var router = express.Router();
 
-//用户注册
+// 用户注册
 router.post('/register', (req, res) => {
 	res.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
 	var obj = req.body;
@@ -46,7 +46,6 @@ router.post('/register', (req, res) => {
 		}
 		sql = 'INSERT INTO user_info (uname,phone,upwd) VALUES(?,?,?)';
 		pool.query(sql, [$uname, $phone, $upwd], (err, result) => {
-			console.log('是否走到这里', err)
 			if (err) throw err;
 			if (result.affectedRows > 0) {
 				res.write(JSON.stringify({
@@ -66,20 +65,19 @@ router.post('/register', (req, res) => {
 
 });
 
-//用户登录
+// 用户登录
 router.post('/login', (req, res) => {
 	res.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
 	var phone = req.body.phone;
 	var upwd = req.body.upwd;
 	pool.query(
-		"select * from user_info where phone=? and upwd=?",
+		"select uid,uname,phone,signature from user_info where phone=? and upwd=?",
 		[phone, upwd],
-		(err, result)=> {
+		(err, result) => {
 			if (err) console.log(err);
 			if (result.length > 0) {
 				var user = result[0]
 				req.session.uid = user.uid
-				// console.log(req.session.uid)
 				res.write(JSON.stringify({
 					ok: 1,
 					msg: "登录成功！",
@@ -97,6 +95,11 @@ router.post('/login', (req, res) => {
 		}
 	)
 });
+
+// 修改用户信息
+router.post('/setUserInfo', (req, res) => {
+	console.log(req, '接收数据')
+})
 
 /*用户登录状态 */
 // router.get("/islogin",(req,res)=>{
