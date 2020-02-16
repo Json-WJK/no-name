@@ -44,7 +44,7 @@ import { Toast } from "mand-mobile";
 export default {
   data() {
     return {
-      LoginOrRegister: 0, // 当前为 登录或注册  1:登录 0:注册
+      LoginOrRegister: 1, // 当前为 登录或注册  1:登录 0:注册
       name: "", // 昵称
       account: "", // 账号
       password: "" // 密码
@@ -89,6 +89,7 @@ export default {
         if (res.ok) {
           Toast.succeed(res.msg);
           this.shut();
+          // 本地存储用户信息
           localStorage.setItem("loginInfo", JSON.stringify(res.data.items[0]));
           this.$store.commit("setAPPRefresh", true);
           console.log(res.data.items[0]);

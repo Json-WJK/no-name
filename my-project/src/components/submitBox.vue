@@ -4,7 +4,13 @@
       <div class="submitBox-mask-box" @click.stop="stop">
         <div class="title">{{ title }}</div>
         <div class="input">
-          <input type="text" :maxlength="maxLength" :placeholder="'最多输入' + maxLength + '个字'" />
+          <input
+            type="text"
+            :maxlength="maxLength"
+            :placeholder="'最多输入' + maxLength + '个字'"
+            onkeyup="this.value=this.value.replace(/[, ]/g,'')"
+            v-model="value"
+          />
         </div>
         <div class="cancel-or-affirm">
           <span @click="cancelF">{{ cancel }}</span>
@@ -15,6 +21,7 @@
   </div>
 </template>
 <script>
+import { Toast } from "mand-mobile";
 export default {
   props: {
     title: {
@@ -34,23 +41,43 @@ export default {
       default: 30
     }
   },
+  data() {
+    return {
+      value: "" // 用户提交的内容
+    };
+  },
   methods: {
     cancelF() {
       // 取消
-      this.close();
+      let res = {
+        success: false
+      };
+      this.close(res);
     },
     affirmF() {
       // 确定
-
-      this.close();
+      console.log(this.value, "用户提交数据");
+      if (!this.verify()) return;
+      let res = {
+        success: true,
+        text: this.value
+      };
+      this.close(res);
     },
-    close() {
+    verify() {
+      if (!this.value) {
+        Toast.failed("您好像并没有填写内容哦！");
+        return false;
+      }
+      return true;
+    },
+    close(res) {
       // 关闭弹窗
-      this.$emit("close");
+      this.$emit("close", res);
     },
     stop() {
       // 阻止冒泡
-      return
+      return;
     }
   }
 };
