@@ -7,4 +7,4 @@ export const register = data => request.post('/user/register', data)
 export const login = data => request.post('/user/login', data)
 
 // 修改用户信息
-export const login = data => request.post('/user/setUserInfo', data)
+export const setUserInfo = data => request.post('/user/setUserInfo', data)
