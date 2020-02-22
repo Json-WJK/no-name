@@ -4,7 +4,7 @@
     <!-- 个人基本信息 -->
     <div class="basicInformation">
       <div :style="{marginTop: '-' + statusBarHeight + 'px'}" class="bg">
-        <img src="@/static/img/用户默认背景.jpeg" alt />
+        <img src="@/static/img/UserDefaultBg.jpeg" alt />
       </div>
       <!-- 顶部各种功能 -->
       <div :style="{top: statusBarHeight + 'px'}" class="function">
