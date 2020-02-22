@@ -8,16 +8,8 @@ var router = express.Router();
 router.post('/register', (req, res) => {
 	res.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
 	var obj = req.body;
-	var $uname = obj.uname;
-	var $upwd = obj.upwd
 	var $phone = obj.phone
-	if ($uname == "") {
-		res.write(JSON.stringify({
-			ok: 0,
-			msg: "用户名不能为空"
-		}))
-		return;
-	}
+	var $upwd = obj.upwd
 	if ($upwd == "") {
 		res.write(JSON.stringify({
 			ok: 0,
@@ -32,20 +24,21 @@ router.post('/register', (req, res) => {
 		}))
 		return;
 	}
-	var sql = 'select * from user_info where uname=?'
-	pool.query(sql, [$uname], (err, result) => {
+	var sql = 'select * from user_info where phone=?'
+	pool.query(sql, [$phone], (err, result) => {
 		console.log('查询结果', result)
 		if (err) throw err;
 		if (result.length > 0) {
 			res.write(JSON.stringify({
 				ok: 0,
-				msg: "该昵称已被注册哦！"
+				msg: "该手机号已被注册哦！"
 			}))
 			res.end();
 			return
 		}
-		sql = 'INSERT INTO user_info (uname,phone,upwd) VALUES(?,?,?)';
-		pool.query(sql, [$uname, $phone, $upwd], (err, result) => {
+		let date = new Date()
+		sql = 'INSERT INTO user_info (phone,upwd,creationTime) VALUES(?,?,?)';
+		pool.query(sql, [$phone, $upwd, date], (err, result) => {
 			if (err) throw err;
 			if (result.affectedRows > 0) {
 				res.write(JSON.stringify({
@@ -71,7 +64,7 @@ router.post('/login', (req, res) => {
 	var phone = req.body.phone;
 	var upwd = req.body.upwd;
 	pool.query(
-		"select uid,uname,phone,signature from user_info where phone=? and upwd=?",
+		"select uname,phone from user_info where phone=? and upwd=?",
 		[phone, upwd],
 		(err, result) => {
 			if (err) console.log(err);

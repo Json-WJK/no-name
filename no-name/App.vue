@@ -1,17 +1,40 @@
 <script>
-	export default {
-		onLaunch: function() {
-			console.log('App Launch')
-		},
-		onShow: function() {
-			console.log('App Show')
-		},
-		onHide: function() {
-			console.log('App Hide')
-		}
-	}
+export default {
+  onLaunch: function() {
+    console.log("App Launch");
+    this.getSystemInfoSync();
+  },
+  onShow: function() {
+    console.log("App Show");
+  },
+  onHide: function() {
+    console.log("App Hide");
+  },
+  methods: {
+    getSystemInfoSync() {
+      // 获取手机信息
+      try {
+        const res = uni.getSystemInfoSync();
+        console.log(res.statusBarHeight);
+        uni.setStorageSync("statusBarHeight", res.statusBarHeight);
+      } catch (e) {
+        // error
+        console.log("获取手机信息错误");
+      }
+    }
+  }
+};
 </script>
 
 <style>
-	/*每个页面公共css */
+/* colorui样式引入 */
+@import "colorui/main.css";
+@import "colorui/icon.css";
+@import "colorui/animation.css";
+html,
+body {
+  font-size: 26upx;
+}
+/* colorui样式引入 */
+/*每个页面公共css */
 </style>
