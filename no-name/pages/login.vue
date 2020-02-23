@@ -76,9 +76,13 @@ export default {
         });
         return;
       }
-      if (this.formData.logoPassword == '') {
-        this.hint = true;
-        this.hintText = "请将信息填写完整";
+      if (this.formData.logoPassword == "") {
+        uni.showToast({
+          title: "请将信息填写完整", //提示的内容,
+          icon: "none", //图标,
+          duration: 1500, //延迟时间,
+          mask: false //显示透明蒙层，防止触摸穿透,
+        });
         return;
       }
       let data = {
@@ -94,7 +98,7 @@ export default {
             mask: true //显示透明蒙层，防止触摸穿透,
           });
           setTimeout(() => {
-            wx.redirectTo({ url: '/pages/basicSetup?uid=' + res.data.uid });
+            wx.redirectTo({ url: "/pages/basicSetup?uid=" + res.data.uid });
           }, 1200);
         } else {
           uni.showToast({
@@ -119,7 +123,7 @@ export default {
         this.hintText = "两次密码输入不一致";
         return;
       }
-      if (this.formData.registerPassword == '') {
+      if (this.formData.registerPassword == "") {
         this.hint = true;
         this.hintText = "请将信息填写完整";
         return;

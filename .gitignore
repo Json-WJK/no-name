@@ -2,6 +2,7 @@
 node_modules
 /no-name/dist
 /server/public
+/no-name/unpackage
 # local env files
 .env.local
 .env.*.local
