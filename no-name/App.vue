@@ -2,7 +2,7 @@
 export default {
   onLaunch: function() {
     console.log("App Launch");
-    this.getSystemInfoSync();
+    this.getSystemInfoSync(); // 获取手机信息
   },
   onShow: function() {
     console.log("App Show");

@@ -76,6 +76,11 @@ export default {
         });
         return;
       }
+      if (this.formData.logoPassword == '') {
+        this.hint = true;
+        this.hintText = "请将信息填写完整";
+        return;
+      }
       let data = {
         phone: this.formData.logoPhone,
         upwd: this.formData.logoPassword
@@ -88,6 +93,9 @@ export default {
             duration: 1500, //延迟时间,
             mask: true //显示透明蒙层，防止触摸穿透,
           });
+          setTimeout(() => {
+            wx.redirectTo({ url: '/pages/basicSetup?uid=' + res.data.uid });
+          }, 1200);
         } else {
           uni.showToast({
             title: res.msg, //提示的内容,

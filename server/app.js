@@ -4,6 +4,8 @@ const session = require('express-session');
 const bodyParser = require('body-parser')
 const cors = require("cors")
 const request = require("request");
+const multer = require('multer')
+const path = require('path')
 //路由文件
 const user = require('./routes/user.js')
 // const search=require('./routes/search.js')

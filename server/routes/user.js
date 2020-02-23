@@ -1,8 +1,22 @@
 const express = require('express');
+const multer = require('multer')
+const path = require('path')
 //引入mysql连接池
 const pool = require('../pool.js');
 //创建路由器
 var router = express.Router();
+
+// 文件上传位置 与 文件名设置
+const storage = multer.diskStorage({
+	destination: function (res, file, cd) {
+		cd(null, path.resolve('public'))
+	},
+	filename: function (req, file, cd) {
+		cd(null, Date.now() + path.extname(file.originalname))
+	}
+})
+
+const upload = multer({ storage: storage })
 
 // 用户注册
 router.post('/register', (req, res) => {
@@ -26,7 +40,6 @@ router.post('/register', (req, res) => {
 	}
 	var sql = 'select * from user_info where phone=?'
 	pool.query(sql, [$phone], (err, result) => {
-		console.log('查询结果', result)
 		if (err) throw err;
 		if (result.length > 0) {
 			res.write(JSON.stringify({
@@ -37,14 +50,18 @@ router.post('/register', (req, res) => {
 			return
 		}
 		let date = new Date()
-		sql = 'INSERT INTO user_info (phone,upwd,creationTime) VALUES(?,?,?)';
-		pool.query(sql, [$phone, $upwd, date], (err, result) => {
+		sql = 'INSERT INTO user_info (phone,upwd,creationTime,momentQuantity) VALUES(?,?,?,?)';
+		pool.query(sql, [$phone, $upwd, date, 1], (err, result) => {
 			if (err) throw err;
 			if (result.affectedRows > 0) {
 				res.write(JSON.stringify({
 					ok: 1,
 					msg: "注册成功！"
 				}))
+				sql = 'INSERT INTO moment (uid,creationTime) VALUES(?,?)';
+				pool.query(sql, [result.insertId, date], (err, result) => {
+					if (err) throw err;
+				})
 			} else {
 				res.write(JSON.stringify({
 					ok: 0,
@@ -64,7 +81,7 @@ router.post('/login', (req, res) => {
 	var phone = req.body.phone;
 	var upwd = req.body.upwd;
 	pool.query(
-		"select uname,phone from user_info where phone=? and upwd=?",
+		"select uid,phone from user_info where phone=? and upwd=?",
 		[phone, upwd],
 		(err, result) => {
 			if (err) console.log(err);
@@ -74,9 +91,7 @@ router.post('/login', (req, res) => {
 				res.write(JSON.stringify({
 					ok: 1,
 					msg: "登录成功！",
-					data: {
-						items: result
-					}
+					data: result[0]
 				}))
 			} else {
 				res.write(JSON.stringify({
@@ -89,11 +104,68 @@ router.post('/login', (req, res) => {
 	)
 });
 
+// 基本流程 设置用户头像与昵称
+router.post('/basicSetup', (req, res) => {
+	let avatar = req.body.avatar
+	let uname = req.body.uname
+	let uid = req.body.uid
+	var sql = "update user_info set avatar=?,uname=? where uid=?";
+	pool.query(sql, [avatar, uname, uid], (err, result) => {
+		if (err) console.log(err)
+		if (result.affectedRows > 0) {
+			res.send({
+				ok: 1,
+				msg: uid
+			})
+		} else {
+			res.send({
+				ok: 0,
+				msg: "服务器内部错误"
+			})
+		}
+		res.end();
+	})
+})
+
+// 获取用户信息
+router.post('/getUserInfo', (req, res) => {
+	res.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
+	var uid = req.body.uid;
+	pool.query(
+		"select * from user_info where uid=?",
+		[uid],
+		(err, result) => {
+			if (err) console.log(err);
+			if (result.length > 0) {
+				result[0].upwd = '*'
+				res.write(JSON.stringify({
+					ok: 1,
+					msg: "获取成功",
+					data: result[0]
+				}))
+			} else {
+				res.write(JSON.stringify({
+					ok: 0,
+					msg: "获取用户信息失败"
+				}))
+			}
+			res.end();
+		}
+	)
+});
+
 // 修改用户信息
 router.post('/setUserInfo', (req, res) => {
 	console.log(req, '接收数据')
 })
 
+// 上传用户头像
+router.post('/uploadFile', upload.single('file'), (req, res) => {
+	res.send({
+		ok: 1,
+		filePath: '/' + path.basename(req.file.path)
+	})
+})
 /*用户登录状态 */
 // router.get("/islogin",(req,res)=>{
 // 	res.writeHead(200);

@@ -10,6 +10,7 @@ CREATE TABLE user_info(
 	phone VARCHAR(32),#手机
 	upwd VARCHAR(32),#密码
 	creationTime DATETIME,#账号创建时间
+	avatar VARCHAR(1036),#用户头像
 	momentQuantity INT#用户发布瞬间总数量
 );
 -- INSERT INTO user_info VALUES(1,"地铁站的风","18696052995",'123456','2020-02-22 23:59:59',0);

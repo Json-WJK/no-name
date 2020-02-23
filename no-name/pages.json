@@ -1,5 +1,11 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{ // 空白页
+			"path": "pages/blankPage"
+		},
+		{ // 登录 与 注册
+			"path": "pages/login"
+		},
 		{ // 广场
 			"path": "pages/plaza"
 		},
@@ -12,8 +18,8 @@
 		{ // 自己
 			"path": "pages/my"
 		},
-		{ // 登录 与 注册
-			"path": "pages/login"
+		{ // 新用户设置基础信息
+			"path": "pages/basicSetup"
 		}
 	],
 	"globalStyle": {
