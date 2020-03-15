@@ -12,7 +12,7 @@ var router = express.Router();
 router.post('/share', (req, res) => {
   console.log(req.body, '请求参数')
   res.write(JSON.stringify({
-    ok: 1,
+    ok: 1, 
     msg: req.body
   }))
 });
