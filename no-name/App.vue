@@ -28,9 +28,9 @@ export default {
 
 <style>
 /* colorui样式引入 */
-@import "colorui/main.css";
-@import "colorui/icon.css";
-@import "colorui/animation.css";
+@import "/colorui/main.css";
+@import "/colorui/icon.css";
+@import "/colorui/animation.css";
 html,
 body {
   font-size: 26upx;

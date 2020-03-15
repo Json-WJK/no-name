@@ -8,6 +8,7 @@ const multer = require('multer')
 const path = require('path')
 //路由文件
 const user = require('./routes/user.js')
+const bjnews = require('./routes/bjnews.js')
 // const search=require('./routes/search.js')
 // const detail=require('./routes/account-detail.js')
 // const order=require('./routes/order.js')
@@ -37,6 +38,7 @@ console.log("            no-name服务器运行中 ...")
 
 
 app.use('/user', user);
+app.use('/bjnews', bjnews);
 // app.use('/search',search);
 // app.use('/detail',detail);
 // app.use('/order',order);

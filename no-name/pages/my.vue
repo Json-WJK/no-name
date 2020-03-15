@@ -113,7 +113,7 @@ export default {
         success: chooseImageRes => {
           const tempFilePaths = chooseImageRes.tempFilePaths;
           uni.uploadFile({
-            url: "http://localhost:1997/user/uploadFile", //仅为示例，非真实的接口地址
+            url: this.$HTTP + "/user/uploadFile", //仅为示例，非真实的接口地址
             filePath: tempFilePaths[0],
             name: "file",
             success: uploadFileRes => {
