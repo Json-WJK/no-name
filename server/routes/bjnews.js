@@ -11,10 +11,7 @@ var router = express.Router();
 // 用户注册
 router.post('/share', (req, res) => {
   console.log(req.body, '请求参数')
-  res.write(JSON.stringify({
-    ok: 1, 
-    msg: req.body
-  }))
+  res.end(JSON.stringify({ ok: 1, data: req.body }))
 });
 
 
