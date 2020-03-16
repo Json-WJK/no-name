@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([["LHF1"],{LHF1:function(e,t,n){"use strict";n.r(t);var s=n("KHd+"),i=Object(s.a)({},function(){var e=this.$createElement;return(this._self._c||e)("div",[this._v("标签")])},[],!1,null,null,null);i.options.__file="customerLabel.vue";t.default=i.exports}}]);
+//# sourceMappingURL=LHF1.c435bb37.js.map

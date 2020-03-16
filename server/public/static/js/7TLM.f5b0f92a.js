@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([["7TLM"],{"7TLM":function(e,r,t){"use strict";t.r(r);var o={beforeCreate:function(){var e=this.$route,r=e.params,t=e.query,o=r.path;console.log("redirect",o,r,t),this.$router.replace({path:"/"+o,query:t})},render:function(e){return e()}},n=t("KHd+"),u=Object(n.a)(o,void 0,void 0,!1,null,null,null);u.options.__file="redirect.vue";r.default=u.exports}}]);
+//# sourceMappingURL=7TLM.f5b0f92a.js.map
