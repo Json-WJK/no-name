@@ -1,0 +1,9 @@
+.loading .cu-load.data-v-c15ac504,
+.loading .load-modal.data-v-c15ac504 {
+  border-radius: 50%;
+}
+.loading .loadingImg.data-v-c15ac504 {
+  width: 100rpx;
+  height: 100rpx;
+}
+

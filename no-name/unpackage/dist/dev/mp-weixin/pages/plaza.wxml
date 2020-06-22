@@ -1,0 +1,1 @@
+<view class="content data-v-40959fd4" style="{{'margin-top:'+(statusBarHeight+'px')+';'}}">plaza<tab-bar vue-id="d32e777a-1" class="data-v-40959fd4" bind:__l="__l"></tab-bar></view>

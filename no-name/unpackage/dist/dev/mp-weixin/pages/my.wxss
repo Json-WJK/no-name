@@ -1,0 +1,100 @@
+.my .basicInformation.data-v-c1cbe05c {
+  position: relative;
+}
+.my .basicInformation .bg.data-v-c1cbe05c {
+  position: absolute;
+  left: 0;
+  background: #afddbd;
+  width: 100%;
+  height: 500rpx;
+  z-index: -1;
+}
+.my .basicInformation .bg ._img.data-v-c1cbe05c {
+  width: 100%;
+  height: 100%;
+}
+.my .basicInformation .function.data-v-c1cbe05c {
+  position: fixed;
+  right: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  height: 45rpx;
+  box-sizing: border-box;
+  padding: 0 25rpx;
+}
+.my .basicInformation .function .addFriends.data-v-c1cbe05c {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20rpx;
+  color: #fff;
+  box-sizing: border-box;
+  padding: 0 10rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+}
+.my .basicInformation .function .addFriends .text.data-v-c1cbe05c {
+  font-size: 20rpx;
+}
+.my .basicInformation .function .set.data-v-c1cbe05c {
+  color: #fff;
+  margin-left: 15rpx;
+  font-size: 28rpx;
+}
+.my .basicInformation .information .avatar.data-v-c1cbe05c {
+  text-align: center;
+}
+.my .basicInformation .information .avatar image.data-v-c1cbe05c {
+  width: 135rpx;
+  height: 135rpx;
+  border-radius: 50%;
+  background: #eee;
+  box-sizing: border-box;
+  border: 4rpx solid #fff;
+  margin-top: 150rpx;
+}
+.my .basicInformation .information .name.data-v-c1cbe05c {
+  text-align: center;
+  margin-top: 15rpx;
+  color: #fff;
+}
+.my .basicInformation .information .name .text.data-v-c1cbe05c {
+  display: inline-block;
+  margin-right: 5px;
+}
+.my .basicInformation .information .record.data-v-c1cbe05c {
+  text-align: center;
+  margin-top: 10rpx;
+  color: #fff;
+}
+.my .avatarModel.data-v-c1cbe05c {
+  z-index: 99;
+}
+.my .avatarModel .cu-dialog.data-v-c1cbe05c {
+  width: 600rpx;
+}
+.my .avatarModel .cu-dialog .bg-img.data-v-c1cbe05c {
+  width: 600rpx;
+  height: 600rpx;
+}
+.my .avatarModel .cu-dialog .bg-img .image.data-v-c1cbe05c {
+  width: 100%;
+  height: 100%;
+}
+.my .avatarModel .cu-dialog .bg-img .image image.data-v-c1cbe05c {
+  width: 100%;
+  height: 100%;
+}
+.my .cu-modal.data-v-c1cbe05c {
+  z-index: 99;
+}
+.my .cu-modal .setName.data-v-c1cbe05c {
+  background: #eee;
+  height: 70rpx;
+  caret-color: #39b54a;
+  box-sizing: border-box;
+  padding: 0 10rpx;
+}
+

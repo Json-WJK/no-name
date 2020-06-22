@@ -1,0 +1,1 @@
+<view class="loading _div data-v-c15ac504"><block wx:if="{{loadModal}}"><view class="cu-load load-modal data-v-c15ac504"><image class="loadingImg data-v-c15ac504" src="/static/img/loading.jpg" mode="aspectFit"></image><view class="gray-text data-v-c15ac504">加载中...</view></view></block></view>

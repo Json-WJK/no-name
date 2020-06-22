@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/blankPage",
+    "pages/login",
+    "pages/plaza",
+    "pages/attention",
+    "pages/chat",
+    "pages/my",
+    "pages/basicSetup"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8",
+    "navigationStyle": "custom"
+  },
+  "usingComponents": {
+    "cu-custom": "/colorui/components/cu-custom"
+  },
+  "sitemapLocation": "sitemap.json"
+}

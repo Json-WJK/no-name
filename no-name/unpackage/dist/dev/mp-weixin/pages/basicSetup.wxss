@@ -1,0 +1,40 @@
+.basicSetup.data-v-224a1d95 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #fff;
+  width: 100%;
+  height: 100%;
+}
+.basicSetup .avatar.data-v-224a1d95 {
+  width: 500rpx;
+  height: 500rpx;
+  background: #eee;
+  margin: 200rpx auto 0;
+}
+.basicSetup .avatar image.data-v-224a1d95 {
+  width: 100%;
+  height: 100%;
+}
+.basicSetup .name.data-v-224a1d95 {
+  width: 500rpx;
+  margin: 30rpx auto 0;
+}
+.basicSetup .name .hint.data-v-224a1d95 {
+  color: #999;
+}
+.basicSetup .name input.data-v-224a1d95 {
+  width: 100%;
+  height: 65rpx;
+  margin-top: 15rpx;
+  background: #eee;
+  caret-color: #39b54a;
+  box-sizing: border-box;
+  padding: 0 10rpx;
+}
+.basicSetup .button.data-v-224a1d95 {
+  width: 500rpx;
+  margin: 50rpx auto 0;
+  background: #39b54a;
+}
+

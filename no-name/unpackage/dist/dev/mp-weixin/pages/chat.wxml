@@ -1,0 +1,1 @@
+<view style="{{'margin-top:'+(statusBarHeight+'px')+';'}}" class="_div">chat<tab-bar vue-id="8faa0456-1" bind:__l="__l"></tab-bar></view>
