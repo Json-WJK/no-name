@@ -1,25 +1,46 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{ // 空白页
-			"path": "pages/blankPage"
+			"path": "pages/blankPage",
+			"style": {
+				"navigationBarTitleText": "空白页"
+			}
 		},
 		{ // 登录 与 注册
-			"path": "pages/login"
+			"path": "pages/login",
+			"style": {
+				"navigationBarTitleText": "登录/注册"
+			}
 		},
 		{ // 广场
-			"path": "pages/plaza"
+			"path": "pages/plaza",
+			"style": {
+				"navigationBarTitleText": "广场"
+			}
 		},
 		{ // 关注
-			"path": "pages/attention"
+			"path": "pages/attention",
+			"style": {
+				"navigationBarTitleText": "关注"
+			}
 		},
 		{ // 聊天
-			"path": "pages/chat"
+			"path": "pages/chat",
+			"style": {
+				"navigationBarTitleText": "聊天"
+			}
 		},
 		{ // 自己
-			"path": "pages/my"
+			"path": "pages/my",
+			"style": {
+				"navigationBarTitleText": "自己"
+			}
 		},
 		{ // 新用户设置基础信息
-			"path": "pages/basicSetup"
+			"path": "pages/basicSetup",
+			"style": {
+				"navigationBarTitleText": "设置信息"
+			}
 		}
 	],
 	"globalStyle": {
