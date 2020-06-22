@@ -179,8 +179,6 @@ router.get("/getUserMoment", (req, res) => {
 	}
 	pool.query(sql, (err, result) => {
 		if (err) console.log(err);
-		result.forEach(item => {
-		})
 		res.writeHead(200, {
 			"Content-Type": "application/json;charset=utf-8",
 			"Access-Control-Allow-Origin": "*"
