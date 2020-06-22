@@ -3,8 +3,9 @@ import Vue from 'vue'
 Vue.use(Vuex)
 
 
-export const HTTP = 'http://47.116.70.87:1997'
-// export const HTTP = 'http://localhost:1997'
+// export const HTTP = 'http://47.116.70.87:1997'
+export const HTTP = location.protocol + '//' + location.hostname + ':1997'
+console.log(HTTP)
 
 const store = new Vuex.Store({
   state: {

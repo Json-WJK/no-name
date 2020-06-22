@@ -49,7 +49,8 @@ router.post('/register', (req, res) => {
 			res.end();
 			return
 		}
-		let date = new Date()
+		let date = new Date().toLocaleString()
+		console.log(date)
 		sql = 'INSERT INTO user_info (phone,upwd,creationTime,momentQuantity) VALUES(?,?,?,?)';
 		pool.query(sql, [$phone, $upwd, date, 1], (err, result) => {
 			if (err) throw err;
