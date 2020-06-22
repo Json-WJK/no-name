@@ -166,6 +166,32 @@ router.post('/uploadFile', upload.single('file'), (req, res) => {
 		filePath: '/' + path.basename(req.file.path)
 	})
 })
+
+// 获取瞬间
+router.get("/getUserMoment", (req, res) => {
+	let uid = req.query.userId
+	let sql;
+	if (uid && uid != 'undefined') { // 查询用户瞬间
+		sql = `select * from moment where uid=${uid}`
+	} else { // 查询所有瞬间
+		sql = "select * from moment"
+	}
+	pool.query(sql, (err, result) => {
+		if (err) console.log(err);
+		result.forEach(item => {
+		})
+		res.writeHead(200, {
+			"Content-Type": "application/json;charset=utf-8",
+			"Access-Control-Allow-Origin": "*"
+		})
+		res.write(JSON.stringify({
+			ok: 1,
+			list: result
+		}))
+		res.end()
+	})
+})
+
 /*用户登录状态 */
 // router.get("/islogin",(req,res)=>{
 // 	res.writeHead(200);

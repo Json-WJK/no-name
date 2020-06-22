@@ -6,7 +6,8 @@ var pool=mysql.createPool({
   user: 'root',
   password: '',
   database: 'no_name',
-  connectionLimit: 20
+  connectionLimit: 20,
+  timezone: "08:00"
 });
 //导出连接
 module.exports=pool;

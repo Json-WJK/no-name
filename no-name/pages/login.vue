@@ -48,7 +48,7 @@
 </template>
 <script>
 import { isPoneAvailable } from "@/utils";
-import { login, register } from "@/api";
+import { login, register, getUserInfo } from "@/api";
 export default {
   data() {
     return {
@@ -97,9 +97,21 @@ export default {
             duration: 1500, //延迟时间,
             mask: true //显示透明蒙层，防止触摸穿透,
           });
-          setTimeout(() => {
-            wx.redirectTo({ url: "/pages/basicSetup?uid=" + res.data.uid });
-          }, 1200);
+          // 获取用户信息 -- 如果用户设置过昵称和头像直接进入
+          getUserInfo({ uid: res.data.uid }).then(info => {
+            console.log(info);
+            setTimeout(() => {
+              if (info.ok && info.data.uname && info.data.avatar) {
+                uni.setStorageSync("UID", res.data.uid);
+                uni.setStorageSync("USERINFO", info.data);
+                uni.redirectTo({ url: "/pages/plaza" });
+              } else {
+                uni.redirectTo({
+                  url: "/pages/basicSetup?uid=" + res.data.uid
+                });
+              }
+            }, 1200);
+          });
         } else {
           uni.showToast({
             title: res.msg, //提示的内容,

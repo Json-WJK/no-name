@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Headers', 'Content-Type');
 	next();
 })
-console.log("            no-name服务器运行中 ...")
+console.log("            no-name服务运行中 ...")
 
 
 app.use('/user', user);

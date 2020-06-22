@@ -29,6 +29,44 @@
         </div>
       </div>
     </div>
+    <!-- 瞬间 动态 -->
+    <div class="moment">
+      <div v-for="(item, index) in momentList" :key="index" class="every">
+        <!-- 时间及操作 -->
+        <div class="timeAndOperation">
+          <span class="time">{{ item.creationTime }}</span>
+          <span class="operation">
+            <text class="lg text-gray" :class="'cuIcon-moreandroid'" style="color: #333;"></text>
+          </span>
+        </div>
+        <!-- 文字 -->
+        <div class="text">{{ item.content }}</div>
+        <!-- 单一图片 -->
+        <div v-if="item.images.length == 1" class="imgOnly">
+          <div class="img">
+            <img src="@/static/img/UserDefaultBg.jpeg" alt />
+          </div>
+        </div>
+        <!-- 多图片 -->
+        <div v-if="item.images.length > 1" class="imgs">
+          <div class="img">
+            <img src="@/static/img/UserDefaultBg.jpeg" alt />
+          </div>
+          <div class="img">
+            <img src="@/static/img/UserDefaultBg.jpeg" alt />
+          </div>
+          <div class="img">
+            <img src="@/static/img/UserDefaultBg.jpeg" alt />
+          </div>
+          <div class="img">
+            <img src="@/static/img/UserDefaultBg.jpeg" alt />
+          </div>
+          <div class="img">
+            <img src="@/static/img/UserDefaultBg.jpeg" alt />
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- 更改头像弹框 -->
     <view
       @click="avatarModel"
@@ -73,7 +111,7 @@
 <script>
 import TabBar from "@/components/TabBar";
 import loading from "@/components/loading";
-import { getUserInfo, basicSetup } from "@/api";
+import { getUserInfo, basicSetup, getUserMoment } from "@/api";
 export default {
   components: {
     TabBar,
@@ -83,6 +121,7 @@ export default {
     return {
       statusBarHeight: uni.getStorageSync("statusBarHeight"), // 兼容安卓通知栏
       userInfo: {}, // 用户信息
+      momentList: [],
       avatarModelShow: false, //更换用户头像弹框
       nameModelShow: false, // 更改用户昵称弹框
       loadingShow: false, // loading是否显示
@@ -90,8 +129,12 @@ export default {
     };
   },
   computed: {
+    // 用户id
+    userId() {
+      return uni.getStorageSync("UID");
+    },
+    // 用户注册账号天数
     day() {
-      // 用户注册账号天数
       let dateSpan, tempDate, iDays, sDate1, sDate2;
       sDate1 = new Date(uni.getStorageSync("USERINFO").creationTime);
       sDate2 = new Date();
@@ -105,10 +148,11 @@ export default {
   onLoad() {
     this.loadingShow = true;
     this.getUserInfo();
+    this.getUserMoment();
   },
   methods: {
+    // 更改头像
     chooseImage() {
-      // 更改头像
       uni.chooseImage({
         success: chooseImageRes => {
           const tempFilePaths = chooseImageRes.tempFilePaths;
@@ -132,8 +176,8 @@ export default {
         }
       });
     },
+    // 修改昵称
     setName() {
-      // 修改昵称
       if (!this.uname) {
         uni.showToast({
           title: "请将数据填写完成", //提示的内容,
@@ -151,8 +195,8 @@ export default {
       this.setUserInfo(data);
       this.nameModel();
     },
+    // 修改用户信息
     setUserInfo(data) {
-      // 修改用户信息
       basicSetup(data).then(res => {
         uni.setStorageSync("UID", res.msg);
         data = {
@@ -174,22 +218,31 @@ export default {
         });
       });
     },
+    // 获取用户瞬间、动态
+    getUserMoment() {
+      getUserMoment(this.userId).then(res => {
+        console.log(res, "啦啦啦");
+        if (res.ok) {
+          this.momentList = res.list;
+        }
+      });
+    },
+    // 更新用户信息
     getUserInfo() {
-      // 更新用户信息
       this.userInfo = uni.getStorageSync("USERINFO") || {};
       this.loadingShow = false;
     },
+    // 更换用户头像弹框控制
     avatarModel() {
-      // 更换用户头像弹框控制
       this.avatarModelShow = !this.avatarModelShow;
     },
+    // 更换用户头像弹框控制
     nameModel() {
-      // 更换用户头像弹框控制
       this.nameModelShow = !this.nameModelShow;
       this.uname = "";
     },
+    // 停止冒泡函数
     stop() {
-      // 停止冒泡函数
       return;
     }
   }
@@ -197,12 +250,15 @@ export default {
 </script>
 <style lang="less" scoped>
 .my {
+  box-sizing: border-box;
+  padding-bottom: 125upx;
   .basicInformation {
     position: relative;
+    width: 100%;
+    height: 500upx;
     .bg {
       position: absolute;
       left: 0;
-      background: rgb(175, 221, 189);
       width: 100%;
       height: 500upx;
       z-index: -1;
@@ -294,6 +350,67 @@ export default {
       caret-color: #39b54a;
       box-sizing: border-box;
       padding: 0 10upx;
+    }
+  }
+  // 瞬间 动态
+  .moment {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20upx 15upx 20upx 20upx;
+    .every {
+      background: #fff;
+      border-radius: 10upx;
+      box-sizing: border-box;
+      padding: 20upx;
+      box-shadow: rgb(200, 200, 200) 0rpx 0rpx 15upx;
+      .timeAndOperation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .time {
+          color: #999;
+        }
+        .operation {
+          text {
+            font-size: 40upx;
+          }
+        }
+      }
+      .text {
+        margin-top: 10upx;
+        color: #333;
+        box-sizing: border-box;
+        padding-right: 10upx;
+      }
+      .imgOnly {
+        box-sizing: border-box;
+        margin-top: 10upx;
+        padding-right: 10upx;
+        .img {
+          width: 100%;
+          img {
+            border-radius: 20upx;
+            width: 100%;
+          }
+        }
+      }
+      .imgs {
+        box-sizing: border-box;
+        margin-top: 10upx;
+        padding-right: 10upx;
+        display: flex;
+        flex-wrap: wrap;
+        .img {
+          width: 32%;
+          img {
+            border-radius: 20upx;
+            width: 100%;
+          }
+        }
+        .img:not(:nth-child(3n + 1)) {
+          margin-left: 10upx;
+        }
+      }
     }
   }
 }
