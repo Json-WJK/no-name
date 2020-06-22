@@ -169,7 +169,7 @@ export default {
                   uname: this.userInfo.uname
                 };
                 this.avatarModel();
-                this.setUserInfo();
+                this.setUserInfo(data);
               }
             }
           });
@@ -192,11 +192,13 @@ export default {
         uname: this.uname
       };
       this.loadingShow = true;
+      console.log(data, '啥玩意儿')
       this.setUserInfo(data);
       this.nameModel();
     },
     // 修改用户信息
     setUserInfo(data) {
+      console.log(data, '什么情况')
       basicSetup(data).then(res => {
         uni.setStorageSync("UID", res.msg);
         data = {
