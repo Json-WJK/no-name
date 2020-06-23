@@ -51,7 +51,7 @@ const handleAbort = function (err) {
             cb(err);
         });
     } else {
-        print('error:' + err, 'error');
+        // print('error:' + err, 'error');
     }
 };
 
