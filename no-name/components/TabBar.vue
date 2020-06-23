@@ -13,7 +13,7 @@
       >
         <view class="cuIcon-favor"></view>关注
       </view>
-      <view class="action text-gray add-action">
+      <view @click="skip('/pages/release')" class="action text-gray add-action">
         <button class="cu-btn cuIcon-add bg-green shadow"></button>
         发布
       </view>
@@ -51,9 +51,11 @@ export default {
   },
   methods: {
     skip(path) {
-      console.log(path, this.highlight, "跳转路径");
-      this.$store.commit("setHighlight", path);
-      uni.reLaunch({ url: path });
+      if (path != "/pages/release") {
+        uni.reLaunch({ url: path });
+      } else {
+        uni.navigateTo({ url: path });
+      }
     }
   }
 };

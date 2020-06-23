@@ -31,6 +31,7 @@ guard.beforeEach((to, from, next) => {
     console.log('from: ', from);
     console.log('=================');
     console.log('\n');
+    store.commit("setHighlight", to.url);
     if (!uni.getStorageSync('UID') && !to.url.includes('/pages/login') && !to.url.includes('/pages/basicSetup')) {
         console.log('用户未登录')
         return next({

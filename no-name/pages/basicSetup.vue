@@ -37,7 +37,7 @@ export default {
     submit() {
       // 提交用户头像与用户昵称
       if (!this.avatarPath) {
-        wx.showToast({
+        uni.showToast({
           title: "请选择您的头像", //提示的内容,
           icon: "none", //图标,
           duration: 1500, //延迟时间,
@@ -46,7 +46,7 @@ export default {
         return;
       }
       if (!this.name) {
-        wx.showToast({
+        uni.showToast({
           title: "请设置您的昵称", //提示的内容,
           icon: "none", //图标,
           duration: 1500, //延迟时间,
@@ -80,7 +80,7 @@ export default {
             mask: true //显示透明蒙层，防止触摸穿透,
           });
           setTimeout(() => {
-            wx.redirectTo({ url: "/pages/plaza" });
+            uni.redirectTo({ url: "/pages/plaza" });
           }, 1200);
         }
       });
@@ -91,7 +91,7 @@ export default {
         success: chooseImageRes => {
           const tempFilePaths = chooseImageRes.tempFilePaths;
           uni.uploadFile({
-            url: this.$HTTP +"/user/uploadFile", //仅为示例，非真实的接口地址
+            url: this.$HTTP +"/user/uploadFile",
             filePath: tempFilePaths[0],
             name: "file",
             success: uploadFileRes => {

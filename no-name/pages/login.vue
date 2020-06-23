@@ -233,7 +233,7 @@ export default {
     width: 100%;
     text-align: center;
   }
-  .cu-dialog{
+  .cu-dialog {
     .action {
       font-size: 32upx;
       margin-left: 0;

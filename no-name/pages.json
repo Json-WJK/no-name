@@ -41,13 +41,19 @@
 			"style": {
 				"navigationBarTitleText": "设置信息"
 			}
+		},
+		{ // 发布动态
+			"path": "pages/release",
+			"style": {
+				"navigationBarTitleText": "发布"
+			}
 		}
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
+		"navigationBarBackgroundColor": "#F7F7F7",
+		"backgroundColor": "#F7F7F7",
 		"navigationStyle": "custom"
 	}
 }

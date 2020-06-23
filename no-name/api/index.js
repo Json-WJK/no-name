@@ -17,3 +17,6 @@ export const setUserInfo = data => request.post('/user/setUserInfo', data)
 
 // 获取用户瞬间、动态
 export const getUserMoment = userId => request.get(`/user/getUserMoment?userId=${userId}`)
+
+// 发布用户瞬间、动态
+export const releaseMoment = data => request.post(`/user/releaseMoment`, data)

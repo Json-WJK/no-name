@@ -2,6 +2,7 @@
 export default {
   onLaunch: function() {
     console.log("App Launch");
+    this.$store.commit("setUserInfo", uni.getStorageSync("USERINFO"));
     this.getSystemInfoSync(); // 获取手机信息
   },
   onShow: function() {
@@ -31,6 +32,8 @@ export default {
 @import "/colorui/main.css";
 @import "/colorui/icon.css";
 @import "/colorui/animation.css";
+@import "/styles/index.css";
+@import "./uni.scss";
 html,
 body {
   font-size: 26upx;

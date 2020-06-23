@@ -44,25 +44,13 @@
         <!-- 单一图片 -->
         <div v-if="item.images.length == 1" class="imgOnly">
           <div class="img">
-            <img src="@/static/img/UserDefaultBg.jpeg" alt />
+            <img :src="$HTTP + item.images[0]" alt />
           </div>
         </div>
         <!-- 多图片 -->
         <div v-if="item.images.length > 1" class="imgs">
-          <div class="img">
-            <img src="@/static/img/UserDefaultBg.jpeg" alt />
-          </div>
-          <div class="img">
-            <img src="@/static/img/UserDefaultBg.jpeg" alt />
-          </div>
-          <div class="img">
-            <img src="@/static/img/UserDefaultBg.jpeg" alt />
-          </div>
-          <div class="img">
-            <img src="@/static/img/UserDefaultBg.jpeg" alt />
-          </div>
-          <div class="img">
-            <img src="@/static/img/UserDefaultBg.jpeg" alt />
+          <div v-if="(el, i) in item.images" :key="i" class="img">
+            <img :src="$HTTP + el" alt />
           </div>
         </div>
       </div>
@@ -192,13 +180,13 @@ export default {
         uname: this.uname
       };
       this.loadingShow = true;
-      console.log(data, '啥玩意儿')
+      console.log(data, "啥玩意儿");
       this.setUserInfo(data);
       this.nameModel();
     },
     // 修改用户信息
     setUserInfo(data) {
-      console.log(data, '什么情况')
+      console.log(data, "什么情况");
       basicSetup(data).then(res => {
         uni.setStorageSync("UID", res.msg);
         data = {
@@ -211,7 +199,7 @@ export default {
             uni.setStorageSync("USERINFO", res.data);
             this.getUserInfo();
             this.loadingShow = false;
-            wx.showToast({
+            uni.showToast({
               title: "更改成功", //提示的内容,
               icon: "none", //图标,
               duration: 1200 //延迟时间,
@@ -225,6 +213,9 @@ export default {
       getUserMoment(this.userId).then(res => {
         console.log(res, "啦啦啦");
         if (res.ok) {
+          res.list.forEach(item => {
+            item.images && (item.images = JSON.parse(item.images))
+          })
           this.momentList = res.list;
         }
       });
@@ -364,6 +355,7 @@ export default {
       border-radius: 10upx;
       box-sizing: border-box;
       padding: 20upx;
+      margin-top: 20upx;
       box-shadow: rgb(200, 200, 200) 0rpx 0rpx 15upx;
       .timeAndOperation {
         display: flex;
