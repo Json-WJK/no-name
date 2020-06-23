@@ -233,6 +233,12 @@ export default {
     width: 100%;
     text-align: center;
   }
+  .cu-dialog{
+    .action {
+      font-size: 32upx;
+      margin-left: 0;
+    }
+  }
   .hint {
     color: red;
   }
