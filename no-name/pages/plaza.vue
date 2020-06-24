@@ -6,18 +6,17 @@
       <view class="cu-item shadow">
         <view class="cu-list menu-avatar">
           <view class="cu-item">
-            <view
-              class="cu-avatar round lg"
-              style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"
-            ></view>
+            <view class="cu-avatar round lg">
+              <image style="width: 100%;height: 100%;" :src="$HTTP + item.userInfo.avatar" />
+            </view>
             <view class="content flex-sub">
-              <view>凯尔</view>
+              <view>{{ item.userInfo.uname }}</view>
               <view class="text-gray text-sm flex justify-between">{{ item.creationTime }}</view>
             </view>
           </view>
         </view>
         <view v-if="item.content" class="text-content">{{ item.content }}</view>
-        <!-- 图片 -->
+        <!-- 单个图片 -->
         <view class="grid flex-sub padding-lr col-1">
           <view v-for="(el, i) in item.images" :key="i" class="bg-img only-img">
             <image :src="$HTTP + el" mode="aspectFill" alt />
@@ -128,6 +127,12 @@ page {
 .cu-list.menu > .cu-item:after {
   border: none;
 }
+// 头像
+.cu-avatar {
+  border-radius: 50%;
+  overflow: hidden;
+}
+// 瞬间、动态为单个图片
 .cu-card > .cu-item {
   margin-top: 0;
   margin-bottom: 20upx;
