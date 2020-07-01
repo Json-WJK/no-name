@@ -60,7 +60,7 @@ router.post('/register', (req, res) => {
 					ok: 1,
 					msg: "注册成功！"
 				}))
-				sql = 'INSERT INTO moment (uid,creationTime,genre) VALUES(?,?)';
+				sql = 'INSERT INTO moment (uid,creationTime,genre) VALUES(?,?,?)';
 				pool.query(sql, [result.insertId, date, 2], (err, result) => {
 					if (err) throw err;
 				})
