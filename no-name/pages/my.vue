@@ -19,9 +19,9 @@
         <div class="avatar">
           <image @click="avatarModel" :src="$HTTP + userInfo.avatar" mode="aspectFill" alt />
         </div>
-        <div @click="nameModel" class="name">
-          <span class="text">{{ userInfo.uname }}</span>
-          <span class="cuIcon-write"></span>
+        <div class="name">
+          <span @click="nameModel" class="text">{{ userInfo.uname }}</span>
+          <span @click="nameModel" class="cuIcon-write"></span>
         </div>
         <div class="record">
           <span class="time">{{ day }}天，</span>
