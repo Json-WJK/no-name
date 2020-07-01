@@ -75,23 +75,35 @@ export default {
     cancelImg(index) {
       this.form.images.splice(index, 1);
     },
-    // 上传图片
+    // 选择图片
     chooseImage() {
       uni.chooseImage({
+        count: 9,
         success: chooseImageRes => {
           const tempFilePaths = chooseImageRes.tempFilePaths;
-          uni.uploadFile({
-            url: this.$HTTP + "/user/uploadFile",
-            filePath: tempFilePaths[0],
-            name: "file",
-            success: uploadFileRes => {
-              console.log(uploadFileRes);
-              if (uploadFileRes.statusCode == 200) {
-                let imgPath = JSON.parse(uploadFileRes.data).filePath;
-                this.form.images.push(imgPath);
-              }
-            }
-          });
+          console.log(tempFilePaths)
+          this.uploadFile(tempFilePaths, 0);
+        }
+      });
+    },
+    // 递归上传顺序上传多文件
+    uploadFile(tempFilePaths, index) {
+      let i = index + 1;
+      if (index == tempFilePaths.length) {
+        // 遍历完成
+        return;
+      }
+      uni.uploadFile({
+        url: this.$HTTP + "/user/uploadFile",
+        filePath: tempFilePaths[i],
+        name: "file",
+        success: uploadFileRes => {
+          console.log(uploadFileRes);
+          if (uploadFileRes.statusCode == 200) {
+            let imgPath = JSON.parse(uploadFileRes.data).filePath;
+            this.form.images.push(imgPath);
+            this.uploadFile(tempFilePaths, i);
+          }
         }
       });
     }
