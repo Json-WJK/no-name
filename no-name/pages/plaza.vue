@@ -1,93 +1,106 @@
 <template>
   <!-- 广场 -->
-  <view :style="{marginTop: statusBarHeight + 'px'}" class="content">
+  <div :style="{marginTop: statusBarHeight + 'px'}" class="content">
     <!-- 瞬间 动态 -->
-    <view v-for="(item,index) in momentList" :key="index" class="cu-card dynamic">
-      <view class="cu-item shadow">
-        <view class="cu-list menu-avatar">
-          <view class="cu-item">
-            <view class="cu-avatar round lg">
-              <image style="width: 100%;height: 100%;" :src="$HTTP + item.userInfo.avatar" />
-            </view>
-            <view class="content flex-sub">
-              <view>{{ item.userInfo.uname }}</view>
-              <view class="text-gray text-sm flex justify-between">{{ item.creationTime }}</view>
-            </view>
-          </view>
-        </view>
-        <view v-if="item.content" class="text-content">{{ item.content }}</view>
+    <div v-for="(item,index) in momentList" :key="index" class="cu-card dynamic">
+      <div class="cu-item shadow">
+        <div class="cu-list menu-avatar">
+          <div class="cu-item">
+            <div class="cu-avatar round lg">
+              <img style="width: 100%;height: 100%;" :src="$HTTP + item.userInfo.avatar" />
+            </div>
+            <div class="content flex-sub">
+              <div>{{ item.userInfo.uname }}</div>
+              <div class="text-gray text-sm flex justify-between">{{ item.creationTime }}</div>
+            </div>
+          </div>
+        </div>
+        <div v-if="item.content" class="text-content">{{ item.content }}</div>
         <!-- 单个图片 -->
-        <view class="grid flex-sub padding-lr col-1">
-          <view v-for="(el, i) in item.images" :key="i" class="bg-img only-img">
-            <image :src="$HTTP + el" mode="aspectFill" alt />
-          </view>
-        </view>
+        <div v-if="item.images.length <= 1" class="grid flex-sub padding-lr col-1">
+          <div v-for="(el, i) in item.images" :key="i" class="bg-img only-img">
+            <image @click="previewImage(item.images, i)" :src="$HTTP + el" mode="aspectFill" alt />
+          </div>
+        </div>
+        <!-- 多个图片 -->
+        <div v-else class="grid flex-sub padding-lr col-1 flex-box">
+          <div v-for="(el, i) in item.images" :key="i" class="bg-imgs only-imgs">
+            <image
+              @click="previewImage(item.images, i)"
+              :src="$HTTP + el"
+              mode="aspectFill"
+              alt
+              class="images"
+            />
+          </div>
+        </div>
         <!-- 点赞与评论数 -->
-        <view class="text-gray text-sm text-right padding">
-          <!-- <text class="cuIcon-attentionfill margin-lr-xs"></text>10 -->
-          <text class="cuIcon-appreciatefill margin-lr-xs"></text>20
-          <text class="cuIcon-messagefill margin-lr-xs"></text>30
-        </view>
+        <div class="text-gray text-sm text-right padding">
+          <!-- <span class="cuIcon-attentionfill margin-lr-xs"></span>10 -->
+          <!-- <span class="cuIcon-appreciatefill margin-lr-xs"></span>20
+          <span class="cuIcon-messagefill margin-lr-xs"></span>30 -->
+        </div>
         <!-- 评论 -->
-        <view v-if="false" class="cu-list menu-avatar comment solids-top">
-          <view class="cu-item">
-            <view
+        <div v-if="false" class="cu-list menu-avatar comment solids-top">
+          <div class="cu-item">
+            <div
               class="cu-avatar round"
               style="background-image:url(https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png);"
-            ></view>
-            <view class="content">
-              <view class="text-grey">莫甘娜</view>
-              <view class="text-gray text-content text-df">凯尔，你被自己的光芒变的盲目。</view>
-              <view class="bg-grey padding-sm radius margin-top-sm text-sm">
-                <view class="flex">
-                  <view>凯尔：</view>
-                  <view class="flex-sub">妹妹，你在帮他们给黑暗找借口吗?</view>
-                </view>
-              </view>
-              <view class="margin-top-sm flex justify-between">
-                <view class="text-gray text-df">2018年12月4日</view>
-                <view>
-                  <text class="cuIcon-appreciatefill text-red"></text>
-                  <text class="cuIcon-messagefill text-gray margin-left-sm"></text>
-                </view>
-              </view>
-            </view>
-          </view>
+            ></div>
+            <div class="content">
+              <div class="text-grey">莫甘娜</div>
+              <div class="text-gray text-content text-df">凯尔，你被自己的光芒变的盲目。</div>
+              <div class="bg-grey padding-sm radius margin-top-sm text-sm">
+                <div class="flex">
+                  <div>凯尔：</div>
+                  <div class="flex-sub">妹妹，你在帮他们给黑暗找借口吗?</div>
+                </div>
+              </div>
+              <div class="margin-top-sm flex justify-between">
+                <div class="text-gray text-df">2018年12月4日</div>
+                <div>
+                  <span class="cuIcon-appreciatefill text-red"></span>
+                  <span class="cuIcon-messagefill text-gray margin-left-sm"></span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <view class="cu-item">
-            <view
+          <div class="cu-item">
+            <div
               class="cu-avatar round"
               style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"
-            ></view>
-            <view class="content">
-              <view class="text-grey">凯尔</view>
-              <view class="text-gray text-content text-df">妹妹，如果不是为了飞翔，我们要这翅膀有什么用?</view>
-              <view class="bg-grey padding-sm radius margin-top-sm text-sm">
-                <view class="flex">
-                  <view>莫甘娜：</view>
-                  <view class="flex-sub">如果不能立足于大地，要这双脚又有何用?</view>
-                </view>
-              </view>
-              <view class="margin-top-sm flex justify-between">
-                <view class="text-gray text-df">2018年12月4日</view>
-                <view>
-                  <text class="cuIcon-appreciate text-gray"></text>
-                  <text class="cuIcon-messagefill text-gray margin-left-sm"></text>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
+            ></div>
+            <div class="content">
+              <div class="text-grey">凯尔</div>
+              <div class="text-gray text-content text-df">妹妹，如果不是为了飞翔，我们要这翅膀有什么用?</div>
+              <div class="bg-grey padding-sm radius margin-top-sm text-sm">
+                <div class="flex">
+                  <div>莫甘娜：</div>
+                  <div class="flex-sub">如果不能立足于大地，要这双脚又有何用?</div>
+                </div>
+              </div>
+              <div class="margin-top-sm flex justify-between">
+                <div class="text-gray text-df">2018年12月4日</div>
+                <div>
+                  <span class="cuIcon-appreciate text-gray"></span>
+                  <span class="cuIcon-messagefill text-gray margin-left-sm"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <TabBar></TabBar>
-  </view>
+  </div>
 </template>
 
 <script>
 import TabBar from "@/components/TabBar";
 import { getUserMoment } from "@/api";
+import { previewImage } from "@/utils";
 export default {
   components: {
     TabBar
@@ -113,6 +126,10 @@ export default {
           this.momentList = res.list;
         }
       });
+    },
+    // 图片预览
+    previewImage(urls, index) {
+      previewImage(urls, index, true);
     }
   }
 };
@@ -144,6 +161,22 @@ page {
         height: 100%;
       }
     }
+  }
+}
+// 动态为多个图片时的样式
+.flex-box {
+  display: flex;
+  .only-imgs {
+    width: 189rpx !important;
+    height: 189rpx !important;
+    margin: 10rpx 0 0 20rpx;
+    .images {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .only-imgs:nth-child(3n + 1) {
+    margin: 10rpx 0 0 0;
   }
 }
 </style>

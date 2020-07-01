@@ -1,6 +1,7 @@
 <template>
+  <!-- 关注 -->
   <div :style="{marginTop: statusBarHeight + 'px'}">
-    attention
+    敬请期待
     <TabBar></TabBar>
   </div>
 </template>

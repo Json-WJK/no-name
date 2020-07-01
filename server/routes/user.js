@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer')
 const path = require('path')
+const async = require('async')
 //引入mysql连接池
 const pool = require('../pool.js');
 //创建路由器
@@ -179,18 +180,14 @@ router.get("/getUserMoment", (req, res) => {
 	}
 	pool.query(sql, (err, result) => {
 		if (err) console.log(err);
-		new Promise(resolve => {
-			result.map((item, index) => {
-				sql = "select * from user_info where uid=?"
-				pool.query(sql, [item.uid], (err, userInfo) => {
-					if (err) console.log(err);
-					item.userInfo = userInfo[0]
-					if (index == result.length - 1) {
-						resolve()
-					}
-				})
+		async.each(result, (item, callback) => {
+			sql = "select * from user_info where uid=?"
+			pool.query(sql, [item.uid], (err, userInfo) => {
+				if (err) console.log(err);
+				item.userInfo = userInfo[0]
+				callback(null);
 			})
-		}).then(() => {
+		}, () => {
 			res.writeHead(200, {
 				"Content-Type": "application/json;charset=utf-8",
 				"Access-Control-Allow-Origin": "*"
@@ -200,7 +197,16 @@ router.get("/getUserMoment", (req, res) => {
 				list: result
 			}))
 			res.end()
+		}, function (err) {
+			console.log(err)
 		})
+		// result.map((item, index) => {
+		// 	sql = "select * from user_info where uid=?"
+		// 	pool.query(sql, [item.uid], (err, userInfo) => {
+		// 		if (err) console.log(err);
+		// 		item.userInfo = userInfo[0]
+		// 	})
+		// })
 	})
 })
 

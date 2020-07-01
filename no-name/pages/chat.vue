@@ -1,6 +1,7 @@
 <template>
+  <!-- 聊天 -->
   <div :style="{marginTop: statusBarHeight + 'px'}">
-    chat
+    敬请期待
     <TabBar></TabBar>
   </div>
 </template>
